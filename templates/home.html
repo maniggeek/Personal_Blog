@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- ======= Header ======= -->
+<title>{% block title %}HOME | MGEEK{% endblock title %}</title>
+{% block content %}
+<div id="home"class="home__container container-fluid">
+  <div class="container__navbar">
+
+    <div class="navbar-header ">
+      <i class="fa fa-star" aria-hidden="true"></i>
+      <i class="fa fa-star" aria-hidden="true"></i>
+      <i class="fa fa-star" aria-hidden="true"></i>
+    </div>
+
+    <nav class="navbar navbar-light navbar-expand-lg  ">
+      <div class="container-fluid">
+
+        <div id='navbar_menu' class="collapse navbar-collapse ">
+
+          <div class="navbar-nav">
+            <a class="nav-item nav-link " href="{% url 'home' %}">HOME</a>
+            <a class="nav-item nav-link" href="#articles">ARTICLES</a>
+            <a class="nav-item nav-link" href="{% url 'about' %}">ABOUT</a>
+          </div>
+        </div>
+
+        <button class="navbar-toggler   border border-light " type="button" data-bs-toggle="collapse" data-bs-target="#navbar_menu" aria-controls="#navbar_menu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon "></span>
+       </button>
+
+      </div>
+    </nav>
+  </div>
+
+  <hr class='hr_line'>
+
+  <div class="hero__container ">
+    <p class='hero__text ' >GEEKS LOVE BOOKS</p>
+
+    <div class="hero__links ">
+      <a class='hero-link ' href="https://github.com/maniggeek">GitHub</a>
+      <a class='hero-link ' href="https://instagram.com/maniizadi">Instagram</a>
+    </div>
+  </div>
+  <hr class='hr_line'>
+
+  <div class="container-fluid main__post__container">
+    <div id='articles'class="articles__header">
+      <a>ARTICLES</a>
+    </div>
+    {% for post in all_posts %}
+      
+    <div class="each__post  ">
+
+      <div class="main__pic__container">
+        <div class="pic__">
+          <img class='rounded' src="{{post.image.url}}" alt="">
+        </div>
+      </div>
+
+         <div class="main__info__container ">
+
+           <div class="title__ ">
+             <h2 class='text-dark'>{{post.title}}</h2>
+           </div>
+
+           <div class="description__ ">
+             <h4>{{post.description}}</h4>
+           </div>
+
+           <div class="button__">
+             <span>{{post.created_on | date:"M / d / Y"}}</span>
+             <a href="{% url 'post_detail' post.slug %}" class='btn btn-secondary'>READ</a>
+           </div>
+
+         </div>
+
+    </div>
+     <hr class='hr_line'>
+     {% endfor %}
+  </div>
+{% if is_paginated %}
+  <div class=" container-fluid pagination justify-content-center">
+    <nav aria-label="Page navigation ">
+      <ul class="pagination pg-dark ">
+        {% if page_obj.has_previous %}
+        <li class="page-item ">
+          <a href='?page={{ page_obj.previous_page_number }}#articles'class="page-link">Previous</a>
+        </li>
+        {% endif %}
+
+        {% if not page_obj.has_previous %}
+        <li class="page-item ">
+          <a class="nav-link page-link disabled">Previous</a>
+        </li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <li>
+          <a href='?page={{ page_obj.next_page_number }}#articles' class="page-link">Next</a>
+        </li>
+        {% endif %}
+
+        {% if not page_obj.has_next %}
+        <li>
+          <a  href='' class="nav-link page-link disabled">Next</a>
+        </li>
+        {% endif %}
+      </ul>
+   </nav>
+  </div>
+
+{% endif %}
+
+
+</div>
+{% endblock content %}

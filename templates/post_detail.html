@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+<title>{% block title %}{{post.title}}{% endblock title %}</title>
+{% block content %}
+<div class="post_detail_container container-fluid">
+
+  <div class="post_detail_stuff container-fluid ">
+    <div class="post_detail_brand_container container-fluid sticky-top ">
+      <div class="post_detail_brand">
+        <a class="post_detail_back_home" href="{% url 'home' %}">BACK</a>
+        <h1 class='post_detail_brand_text'>MGEEK</h1>
+      </div>
+    </div>
+
+
+
+    <div class="post_detail_info container">
+
+      <div class="post_detail_created_on_container">
+        <div class="post_detail_created_on">{{post.created_on |  date:"DATETIME_FORMAT" | cut:"."}}</div>
+      </div>
+
+     <div class="post_detail_title">
+     <h1 class='post_detail_title_text'>{{post.title}}</h1>
+     </div>
+
+     <div class="post_detail_description">
+        <h3>{{post.description}}</h3>
+     </div>
+
+    </div>
+
+      <div class="post_detail_image_container container">
+          <img class='post_detail_image_image rounded' src="{{post.image.url}}" alt="">
+      </div>
+
+
+    <div class="post_detail_article_container">
+        <div class="post_detail_article">
+         <h1 class='post_detail_article_title'>{{post.p_topic_1}}</h1>
+         <p class='post_detail_article_text'>{{post.paragraph_1 | linebreaksbr}} <!-- for new lines--></p>
+        </div>
+        <div class="post_detail_article">
+         <h1 class='post_detail_article_title'>{{post.p_topic_2}}</h1>
+         <p class='post_detail_article_text'>{{post.paragraph_2 | linebreaksbr}} <!-- for new lines--></p>
+        </div>
+        <div class="post_detail_article">
+         <h1 class='post_detail_article_title'>{{post.p_topic_3}}</h1>
+         <p class='post_detail_article_text'>{{post.paragraph_3 | linebreaksbr}} <!-- for new lines--></p>
+        </div>
+        <div class="post_detail_article">
+         <h1 class='post_detail_article_title'>{{post.p_topic_4}}</h1>
+         <p class='post_detail_article_text'>{{post.paragraph_4 | linebreaksbr}} <!-- for new lines--></p>
+        </div>
+    </div>
+
+  </div>
+  <hr class='hr_line'>
+  {% endblock content %}
+  </div>
