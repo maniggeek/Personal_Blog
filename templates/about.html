@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block title %}ABOUT ME{% endblock title %}
 {% block content %}
@@ -11,7 +11,7 @@
     <div class="post_detail_brand_container container-fluid sticky-top ">
       <div class="post_detail_brand">
         <a style='cursor:pointer;' id='back' class="post_detail_back_home">BACK</a>
-        <h1 class='post_detail_brand_text mt-2'>MGEEK</h1>
+        <img width=160 src="{% static 'img/logo/logo.jpg' %}" class=' rounded post_detail_brand_pic'>
       </div>
     </div>
    <!--we can use animated picture of our-self-->
@@ -22,7 +22,7 @@
    <div class="about__content">
      <div class="about__content__text">
       I’m MANI, a 28 year old geek and programmer living in Iran with my family and
-      my  wonderful friends.I primarily read literary Si-Fi and Fantasy.
+      my  wonderful friends.I primarily read literary Science-Fiction and Fantasy.
       Spend free times at my local indie bookstore, and love my friends circle.
       If I’m not reading I’m probably watching a conceptual movie, developing a new program, drinking coffee in a Cafe , or practicing a new language.
       I started this blog in early of 2021 as a way to share Literary Lifestyle Content and Geek Culture.

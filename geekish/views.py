@@ -34,6 +34,7 @@ class AboutPageView(TemplateView):
 
 
 class PostDetailView(DetailView):
+    
     model = Post
     context_object_name = "post"
     template_name = "post_detail.html"

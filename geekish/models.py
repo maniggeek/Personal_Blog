@@ -17,22 +17,9 @@ class Post(models.Model):
 #default png prevent from image error in test
     image = models.ImageField(upload_to='featured_image/%Y/%m/%d/',blank=True ,default='default.png')
 #title
-
     title = models.CharField(max_length=200)
-#author :optional because this is a personal blog
-
-
-#
+    url = models.URLField(blank=False,null=False)
     description = models.CharField(max_length=60,blank=True,null=False);
-#body
-    p_topic_1 =  models.CharField(max_length=200,null=False,blank=True)
-    paragraph_1 = models.TextField(blank=True,null=False)
-    p_topic_2 =  models.CharField(max_length=200,null=False,blank=True)
-    paragraph_2 = models.TextField(blank=True,null=False)
-    p_topic_3 =  models.CharField(max_length=200,null=False,blank=True)
-    paragraph_3 = models.TextField(blank=True,null=False)
-    p_topic_4 =  models.CharField(max_length=200,null=False,blank=True)
-    paragraph_4 = models.TextField(blank=True,null=False)
 #create_on
     created_on = models.DateTimeField(auto_now_add=True)
     slug = AutoSlugField(populate_from='title')
@@ -50,3 +37,12 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={"slug":self.title})
+
+
+class Paragraph(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name='paragraphs')
+    header = models.CharField(max_length=200,blank=True,null=False)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.header

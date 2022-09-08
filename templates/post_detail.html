@@ -1,32 +1,33 @@
 {% extends 'base.html' %}
 
-
+{% load static %}
 <title>{% block title %}{{post.title}}{% endblock title %}</title>
 {% block content %}
 <div class="post_detail_container container-fluid">
 
   <div class="post_detail_stuff container-fluid ">
     <div class="post_detail_brand_container container-fluid sticky-top ">
-      <div class="post_detail_brand">
-        <a class="post_detail_back_home" href="{% url 'home' %}">BACK</a>
-        <h1 class='post_detail_brand_text'>MGEEK</h1>
+      <div class="post_detail_brand  ">
+        <a class="lightable post_detail_back_home" href="{% url 'home' %}">BACK</a>
+        <div class="form-check form-switch ">
+          <input style='border-color:skyblue;' class=" p-1 form-check-input " type="checkbox" id="DarkSwitch">
+       </div>
+        <img width=130 src="{% static 'img/logo/logo.jpg' %}" class=' rounded post_detail_brand_pic'>
       </div>
     </div>
-
-
 
     <div class="post_detail_info container">
 
       <div class="post_detail_created_on_container">
-        <div class="post_detail_created_on">{{post.created_on |  date:"DATETIME_FORMAT" | cut:"."}}</div>
+        <div class="lightable post_detail_created_on">{{post.created_on |  date:"DATETIME_FORMAT" | cut:"."}}</div>
       </div>
 
      <div class="post_detail_title">
-     <h1 class='post_detail_title_text'>{{post.title}}</h1>
+     <h1 class='lightable post_detail_title_text'>{{post.title}}</h1>
      </div>
 
-     <div class="post_detail_description">
-        <h3>{{post.description}}</h3>
+     <div class=" post_detail_description">
+        <h3 class='lightable'>{{post.description}}</h3>
      </div>
 
     </div>
@@ -37,23 +38,19 @@
 
 
     <div class="post_detail_article_container">
+       {% for paragraph in post.paragraphs.all %}
         <div class="post_detail_article">
-         <h1 class='post_detail_article_title'>{{post.p_topic_1}}</h1>
-         <p class='post_detail_article_text'>{{post.paragraph_1 | linebreaksbr}} <!-- for new lines--></p>
+         <h1 class='lightable post_detail_article_title'>{{paragraph.header}}</h1>
+         <!-- Using javascript to change the dom-->
+         <p class='lightable post_detail_article_text'>{{paragraph.content | urlizetrunc:15 |   linebreaksbr}} <!-- for new lines--></p>
         </div>
-        <div class="post_detail_article">
-         <h1 class='post_detail_article_title'>{{post.p_topic_2}}</h1>
-         <p class='post_detail_article_text'>{{post.paragraph_2 | linebreaksbr}} <!-- for new lines--></p>
-        </div>
-        <div class="post_detail_article">
-         <h1 class='post_detail_article_title'>{{post.p_topic_3}}</h1>
-         <p class='post_detail_article_text'>{{post.paragraph_3 | linebreaksbr}} <!-- for new lines--></p>
-        </div>
-        <div class="post_detail_article">
-         <h1 class='post_detail_article_title'>{{post.p_topic_4}}</h1>
-         <p class='post_detail_article_text'>{{post.paragraph_4 | linebreaksbr}} <!-- for new lines--></p>
+       {% endfor %}
+         <div style='padding:100px;' class="amazon__link w-100 d-flex p-3 justify-content-center ">
+           <a style='width:200px; font-size:1rem; font-weight:600;letter-spacing:1.5px;background:#e63946' class='btn btn-primary post_detail_article_text  pt-2 pb-2 text-light border-0' href="{{post.url}}">Buy The Book</a>
+         </div>
         </div>
     </div>
+
 
   </div>
   <hr class='hr_line'>
